@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            custom{color: blueviolet; zoom: 200%; font-family: Arial, Helvetica, sans-serif;}
+            li{font-size: 150%;}
+            p{font-size: 150%;}
+            nav{font-size: 150%;}
+        </style>
+    </head>
+    
+    <body>
+        <li>Example 1:</li>
+        <p>"1" + 5 + 2 in javascript is:<p>
+        <p id="ans">
+         <script>
+             var ans
+            ans = "1" + 5 + 2
+            document.getElementById("ans").innerHTML = ans
+        </script>
+        <li>Example 2:</li>
+        <p>array and object (aka dictionary) showcase:<p>
+        <p id="data">
+         <script>
+             var arr = [1, 2, 3, 'a', "lol"]
+             var obj = {
+                a: "obc",
+                b: 123,
+                c: 'a'
+             }
+            document.getElementById("data").innerHTML = obj.a
+        </script>
+        <li>Example 3:</li>
+        <p>Functions:<p>
+        <p>Sum</p>
+        <p id="demo1">
+        <p>Minus</p>
+        <p id="demo2">
+        <p>Multiple</p>
+        <p id="demo3">
+        <p>Devide</p>
+        <p id="demo4">
+         <script>
+            function sum(a, b){
+                return a + b
+            }
+            function minus(a, b){
+                return a - b
+            }
+            function multiple(a, b){
+                return a * b
+            }
+            function devide(a, b){
+                return a / b
+            }
+            document.getElementById("demo1").innerHTML = sum(1, 4)
+            document.getElementById("demo2").innerHTML = minus(5, 2)
+            document.getElementById("demo3").innerHTML = multiple(2, 4)
+            document.getElementById("demo4").innerHTML = devide(4, 2)
+        </script>
+        <li>Example 4:</li>
+        <p>Forms:<p>
+            <form name="form" id="form">
+                <p>addition:<br>
+                <input type="text" id="one"> +
+                <input type="text" id="two">
+                <input type="button" name="submit" value="Add!" onclick=sum()>
+                </p>
+              </form>
+        <p>The answer is: <span id="answer"></p>
+            <form name="form" id="form">
+                <p>minus:<br>
+                <input type="text" id="one1"> -
+                <input type="text" id="two1">
+                <input type="button" name="submit" value="Minus!" onclick=minus()>
+                </p>
+              </form>
+        <p>The answer is: <span id="answer2"></p>
+            <form name="form" id="form">
+                <p>multiple:<br>
+                <input type="text" id="one2"> *
+                <input type="text" id="two2">
+                <input type="button" name="submit" value="Multiply!" onclick=multiply()>
+                </p>
+              </form>
+        <p>The answer is: <span id="answer3"></p>
+            <form name="form" id="form">
+                <p>devide:<br>
+                <input type="text" id="one3"> /
+                <input type="text" id="two3">
+                <input type="button" name="submit" value="Devide!" onclick=devide()>
+                </p>
+              </form>
+        <p>The answer is: <span id="answer4"></p>
+         <script>
+             function sum(){
+                var a = parseInt(document.getElementById("one").value)
+                var b = parseInt(document.getElementById("two").value)
+                document.getElementById("answer").innerHTML = a + b
+            }
+            function minus(){
+                var a = parseInt(document.getElementById("one1").value)
+                var b = parseInt(document.getElementById("two1").value)
+                document.getElementById("answer2").innerHTML = a - b
+            }
+            function multiply(){
+                var a = parseInt(document.getElementById("one2").value)
+                var b = parseInt(document.getElementById("two2").value)
+                document.getElementById("answer3").innerHTML = a * b
+            }
+            function devide(){
+                var a = parseInt(document.getElementById("one3").value)
+                var b = parseInt(document.getElementById("two3").value)
+                document.getElementById("answer4").innerHTML = a / b
+            }
+        </script>
+         <li>Example 5:</li>
+         <p>Another calculator:<p>
+             <form name="form" id="form">
+                 <p>1st num:<br>
+                 <input type="text" id="one4"> <br>
+                 2nd num:<br>
+                 <input type="text" id="two4">
+                 <br>
+                 <input type="button" name="submit" value="Add!" onclick=sum1()>
+                 <input type="button" name="submit" value="Minus!" onclick=minus1()>
+                 <input type="button" name="submit" value="Multiply!" onclick=multiply1()>
+                 <input type="button" name="submit" value="Devide!" onclick=devide1()>
+                 </p>
+               </form>
+         <p>The answer is: <span id="answer5"></p>
+          <script>
+              function sum1(){
+                 var a = parseInt(document.getElementById("one4").value)
+                 var b = parseInt(document.getElementById("two4").value)
+                 document.getElementById("answer5").innerHTML = a + b
+             }
+             function minus1(){
+                 var a = parseInt(document.getElementById("one4").value)
+                 var b = parseInt(document.getElementById("two4").value)
+                 document.getElementById("answer5").innerHTML = a - b
+             }
+             function multiply1(){
+                 var a = parseInt(document.getElementById("one4").value)
+                 var b = parseInt(document.getElementById("two4").value)
+                 document.getElementById("answer5").innerHTML = a * b
+             }
+             function devide1(){
+                 var a = parseInt(document.getElementById("one4").value)
+                 var b = parseInt(document.getElementById("two4").value)
+                 document.getElementById("answer5").innerHTML = a / b
+             }
+         </script>
+    </body>
+</html>
