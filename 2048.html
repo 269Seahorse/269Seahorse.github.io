@@ -44,12 +44,28 @@
 			if(id1 != id2)
 			break;
 		}
+        var ouo = Math.floor(Math.random() * 10)
+        var ouo2 = Math.floor(Math.random() * 10)
 		//Set initial 2 values
-		document.getElementById(id1).innerHTML = "2";
-		document.getElementById(id2).innerHTML = "2";
+        if (ouo == 0){
+		    document.getElementById(id1).innerHTML = "4";
+            var ououo = 4;
+        }
+        else{
+		    document.getElementById(id1).innerHTML = "2";
+            var ououo = 2;
+        }
+        if (ouo2 == 0){
+		    document.getElementById(id2).innerHTML = "4";
+            var ououo2 = 4;
+        }
+        else{
+		    document.getElementById(id2).innerHTML = "2";
+            var ououo2 = 2;
+        }
 
-		document.getElementById(id1).style.backgroundColor = getColor(2);
-		document.getElementById(id2).style.backgroundColor = getColor(2);
+		document.getElementById(id1).style.backgroundColor = getColor(ououo);
+		document.getElementById(id2).style.backgroundColor = getColor(ououo2);
 		
 		score = 0;
 		document.getElementById("score").innerHTML = score;
@@ -278,8 +294,16 @@
 			}
 		}
 		var id = ids[Math.floor(Math.random()*ids.length)];
-		document.getElementById(id).innerHTML = "2";
-		document.getElementById(id).style.backgroundColor = getColor(2);
+        var twoOrFour = Math.floor(Math.random() * 10)
+        if(twoOrFour == 0){
+		    document.getElementById(id).innerHTML = "4";
+            var bc = 4;
+        }
+        else{
+		    document.getElementById(id).innerHTML = "2";
+            var bc = 2;
+        }
+		document.getElementById(id).style.backgroundColor = getColor(bc);
 
 		//Check if no move space available
 		var allFilled = true;
