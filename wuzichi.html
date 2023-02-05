@@ -9,13 +9,13 @@
     <center>
 	<h2>五子棋(建議放大)</h2>
     <div id="board"></div>
-        <p>下棋區：<br>
+       <!-- <p>下棋區：<br>
             (格式: x y    範例: 2 5)
             <form name="form" id="form">
                 <input type="text" id="place"> <br>
                 <input type="button" name="submit" value="Decide!" onclick=put()>
             </form>
-        </p>
+        </p>-->
         <p id="error"></p>
         <div id="lol"></div>
         <div id="lolol"></div>
@@ -27,69 +27,71 @@
             var html = ""
             var id = 1
             var id2 = 1
-            html += "　　０００００００００１１１１１１１１１１<br>　　１２３４５６７８９０１２３４５６７８９<br>"
+            var gameover = 0
+            document.getElementById('error').innerHTML = "Ｏ先"
+            html += "　　　ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳ<br>　　　　　　　　　　　　　　　　　　　　　　<br>"
             for(var i = 0; i < 19; i++){
                 switch(i){
                     case 0:
-                    html += "０１"
+                    html += "　１　"
                     break
                     case 1:
-                    html += "０２"
+                    html += "　２　"
                     break
                     case 2:
-                    html += "０３"
+                    html += "　３　"
                     break
                     case 3:
-                    html += "０４"
+                    html += "　４　"
                     break
                     case 4:
-                    html += "０５"
+                    html += "　５　"
                     break
                     case 5:
-                    html += "０６"
+                    html += "　６　"
                     break
                     case 6:
-                    html += "０７"
+                    html += "　７　"
                     break
                     case 7:
-                    html += "０８"
+                    html += "　８　"
                     break
                     case 8:
-                    html += "０９"
+                    html += "　９　"
                     break
                     case 9:
-                    html += "１０"
+                    html += "１０　"
                     break
                     case 10:
-                    html += "１１"
+                    html += "１１　"
                     break
                     case 11:
-                    html += "１２"
+                    html += "１２　"
                     break
                     case 12:
-                    html += "１３"
+                    html += "１３　"
                     break
                     case 13:
-                    html += "１４"
+                    html += "１４　"
                     break
                     case 14:
-                    html += "１５"
+                    html += "１５　"
                     break
                     case 15:
-                    html += "１６"
+                    html += "１６　"
                     break
                     case 16:
-                    html += "１７"
+                    html += "１７　"
                     break
                     case 17:
-                    html += "１８"
+                    html += "１８　"
                     break
                     case 18:
-                    html += "１９"
+                    html += "１９　"
                     break
                 }
                 for(var j = 0; j < 19; j++){
-                    html += '<span id="' + id + ' ' + id2 + '" style="line-height:10px">十</span>'
+                    html += '<span id="' + id + ' ' + id2 + '" onclick=put2(this.id) style="line-height:10px; cursor: pointer">十</span>'
                     id += 1
                 }
                 id = 1
@@ -150,7 +152,7 @@
             }
             document.getElementById('lolololol').innerHTML = html5
 
-            function put(){
+            /*function put(){
                 var data = document.getElementById('place').value
                 var data2 = data.split(" ")
                 var x = parseInt(data2[0])
@@ -182,27 +184,82 @@
                 else{
                     document.getElementById('error').innerHTML = "要嘛你亂打要嘛你超出範圍ㄌ"
                 }
+            }*/
+
+            function put2(data){
+                if(gameover == 0){
+                    var data2 = data.split(" ")
+                    var x = parseInt(data2[0])
+                    var y = parseInt(data2[1])
+                    if(x <= 19 && x >= 0 && y <= 19 && y >= 0){
+                        if(turn % 2 == 0){
+                            if(document.getElementById(x + " " + y).innerHTML != "Ｏ" && document.getElementById(x + " " + y).innerHTML != "Ｘ"){
+                                document.getElementById(x + " " + y).innerHTML = "Ｏ"
+                                turn += 1
+                                document.getElementById('error').innerHTML = "接下來是Ｘ"
+                                checkWin(x, y)
+                            }
+                            else{
+                                document.getElementById('error').innerHTML = "不要放在放過的地方zz"
+                            }
+                        }
+                        else{
+                            if(document.getElementById(x + " " + y).innerHTML != "Ｏ" && document.getElementById(x + " " + y).innerHTML != "Ｘ"){
+                                document.getElementById(x + " " + y).innerHTML = "Ｘ"
+                                document.getElementById('error').innerHTML = "接下來是Ｏ"
+                                turn += 1
+                                checkWin(x, y)
+                            }
+                            else{
+                                document.getElementById('error').innerHTML = "不要放在放過的地方zz"
+                            }
+                        }
+                    }
+                    else{
+                        document.getElementById('error').innerHTML = "要嘛你亂打要嘛你超出範圍ㄌ"
+                    }
+                }
             }
 
             function checkWin(x, y){
-                if((document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+4) + " " + y).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + y).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-4) + " " + y).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+4)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+2)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-4)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById((x+4) + " " + (y+4)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y+2)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById((x-4) + " " + (y-4)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById((x+4) + " " + (y-4)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y-2)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById((x-4) + " " + (y+4)).innerHTML == "Ｏ" )){
-                    document.getElementById('error').innerHTML = "Ｏ贏了，按Esc清空。"
+                if(turn == 361){
+                    document.getElementById('error').innerHTML = "平手，超扯，按Esc清空。"
+                    gameover = 1
                     document.onkeydown = function(e) {
                     switch (e.keyCode) {
                         case 27:
-                            e.preventDefault()
-                            initGame()
+                            if(gameover == 1){
+                                e.preventDefault()
+                                initGame()
+                            }
+                        }
+                    }
+                    console.log("平手")
+                }
+                if((document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+4) + " " + y).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + y).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + y).innerHTML == "Ｏ" && document.getElementById((x-4) + " " + y).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+4)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+2)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById(x + " " + (y-4)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById((x+4) + " " + (y+4)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y+2)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById((x-4) + " " + (y-4)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById((x+4) + " " + (y-4)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y-2)).innerHTML == "Ｏ" && document.getElementById((x+3) + " " + (y-3)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｏ" && document.getElementById((x+2) + " " + (y-2)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｏ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｏ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｏ" && document.getElementById((x-2) + " " + (y+2)).innerHTML == "Ｏ" && document.getElementById((x-3) + " " + (y+3)).innerHTML == "Ｏ" && document.getElementById((x-4) + " " + (y+4)).innerHTML == "Ｏ" )){
+                    document.getElementById('error').innerHTML = "Ｏ贏了，按Esc清空。"
+                    gameover = 1
+                    document.onkeydown = function(e) {
+                    switch (e.keyCode) {
+                        case 27:
+                            if(gameover == 1){
+                                e.preventDefault()
+                                initGame()
+                            }
                         }
                     }
                     console.log("Ｏ贏了")
                 }
                 if((document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｘ" && document.getElementById((x+2) + " " + y).innerHTML == "Ｘ" && document.getElementById((x+3) + " " + y).innerHTML == "Ｘ" && document.getElementById((x+4) + " " + y).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｘ" && document.getElementById((x+2) + " " + y).innerHTML == "Ｘ" && document.getElementById((x+3) + " " + y).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｘ" && document.getElementById((x-2) + " " + y).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｘ" && document.getElementById((x+2) + " " + y).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｘ" && document.getElementById((x-2) + " " + y).innerHTML == "Ｘ" && document.getElementById((x-3) + " " + y).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + y).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + y).innerHTML == "Ｘ" && document.getElementById((x-2) + " " + y).innerHTML == "Ｘ" && document.getElementById((x-3) + " " + y).innerHTML == "Ｘ" && document.getElementById((x-4) + " " + y).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y+2)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y+3)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y+4)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y+2)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y+3)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y-2)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y+2)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y-2)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y-3)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y+1)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById(x + " " + (y-1)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y-2)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y-3)).innerHTML == "Ｘ" && document.getElementById(x + " " + (y-4)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｘ" && document.getElementById((x+2) + " " + (y+2)).innerHTML == "Ｘ" && document.getElementById((x+3) + " " + (y+3)).innerHTML == "Ｘ" && document.getElementById((x+4) + " " + (y+4)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｘ" && document.getElementById((x+2) + " " + (y+2)).innerHTML == "Ｘ" && document.getElementById((x+3) + " " + (y+3)).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｘ" && document.getElementById((x-2) + " " + (y-2)).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｘ" && document.getElementById((x+2) + " " + (y+2)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｘ" && document.getElementById((x-2) + " " + (y-2)).innerHTML == "Ｘ" && document.getElementById((x-3) + " " + (y-3)).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + (y+1)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + (y-1)).innerHTML == "Ｘ" && document.getElementById((x-2) + " " + (y-2)).innerHTML == "Ｘ" && document.getElementById((x-3) + " " + (y-3)).innerHTML == "Ｘ" && document.getElementById((x-4) + " " + (y-4)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｘ" && document.getElementById((x+2) + " " + (y-2)).innerHTML == "Ｘ" && document.getElementById((x+3) + " " + (y-3)).innerHTML == "Ｘ" && document.getElementById((x+4) + " " + (y-4)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｘ" && document.getElementById((x+2) + " " + (y-2)).innerHTML == "Ｘ" && document.getElementById((x+3) + " " + (y-3)).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｘ" && document.getElementById((x-2) + " " + (y+2)).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｘ" && document.getElementById((x+2) + " " + (y-2)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｘ" && document.getElementById((x-2) + " " + (y+2)).innerHTML == "Ｘ" && document.getElementById((x-3) + " " + (y+3)).innerHTML == "Ｘ" && document.getElementById((x+1) + " " + (y-1)).innerHTML == "Ｘ" ) || (document.getElementById(x + " " + y).innerHTML == "Ｘ" && document.getElementById((x-1) + " " + (y+1)).innerHTML == "Ｘ" && document.getElementById((x-2) + " " + (y+2)).innerHTML == "Ｘ" && document.getElementById((x-3) + " " + (y+3)).innerHTML == "Ｘ" && document.getElementById((x-4) + " " + (y+4)).innerHTML == "Ｘ" )){
                     document.getElementById('error').innerHTML = "Ｘ贏了，按Esc清空。"
+                    gameover = 1
                     document.onkeydown = function(e) {
                     switch (e.keyCode) {
                         case 27:
-                            e.preventDefault()
-                            initGame()
+                            if(gameover == 1){
+                                e.preventDefault()
+                                initGame()
+                            }
                         }
                     }
                     console.log("Ｘ贏了")
@@ -211,69 +268,74 @@
 
             function initGame(){
                 html = ""
-                html += "　　０００００００００１１１１１１１１１１<br>　　１２３４５６７８９０１２３４５６７８９<br>"
+                id = 1
+                id2 = 1
+                turn = 0
+                gameover = 0
+                document.getElementById('error').innerHTML = "Ｏ先"
+                html += "　　　ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳ<br>　　　　　　　　　　　　　　　　　　　　　　<br>"
                 for(var i = 0; i < 19; i++){
                     switch(i){
                         case 0:
-                        html += "０１"
+                        html += "　１　"
                         break
                         case 1:
-                        html += "０２"
+                        html += "　２　"
                         break
                         case 2:
-                        html += "０３"
+                        html += "　３　"
                         break
                         case 3:
-                        html += "０４"
+                        html += "　４　"
                         break
                         case 4:
-                        html += "０５"
+                        html += "　５　"
                         break
                         case 5:
-                        html += "０６"
+                        html += "　６　"
                         break
                         case 6:
-                        html += "０７"
+                        html += "　７　"
                         break
                         case 7:
-                        html += "０８"
+                        html += "　８　"
                         break
                         case 8:
-                        html += "０９"
+                        html += "　９　"
                         break
                         case 9:
-                        html += "１０"
+                        html += "１０　"
                         break
                         case 10:
-                        html += "１１"
+                        html += "１１　"
                         break
                         case 11:
-                        html += "１２"
+                        html += "１２　"
                         break
                         case 12:
-                        html += "１３"
+                        html += "１３　"
                         break
                         case 13:
-                        html += "１４"
+                        html += "１４　"
                         break
                         case 14:
-                        html += "１５"
+                        html += "１５　"
                         break
                         case 15:
-                        html += "１６"
+                        html += "１６　"
                         break
                         case 16:
-                        html += "１７"
+                        html += "１７　"
                         break
                         case 17:
-                        html += "１８"
+                        html += "１８　"
                         break
                         case 18:
-                        html += "１９"
+                        html += "１９　"
                         break
                     }
                     for(var j = 0; j < 19; j++){
-                        html += '<span id="' + id + ' ' + id2 + '" style="line-height:10px">十</span>'
+                        html += '<span id="' + id + ' ' + id2 + '"onclick=put2(this.id) style="line-height:10px; cursor: pointer">十</span>'
                         id += 1
                     }
                     id = 1
