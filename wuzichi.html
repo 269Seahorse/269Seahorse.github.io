@@ -211,7 +211,67 @@
 
             function initGame(){
                 html = ""
+                html += "　　０００００００００１１１１１１１１１１<br>　　１２３４５６７８９０１２３４５６７８９<br>"
                 for(var i = 0; i < 19; i++){
+                    switch(i){
+                        case 0:
+                        html += "０１"
+                        break
+                        case 1:
+                        html += "０２"
+                        break
+                        case 2:
+                        html += "０３"
+                        break
+                        case 3:
+                        html += "０４"
+                        break
+                        case 4:
+                        html += "０５"
+                        break
+                        case 5:
+                        html += "０６"
+                        break
+                        case 6:
+                        html += "０７"
+                        break
+                        case 7:
+                        html += "０８"
+                        break
+                        case 8:
+                        html += "０９"
+                        break
+                        case 9:
+                        html += "１０"
+                        break
+                        case 10:
+                        html += "１１"
+                        break
+                        case 11:
+                        html += "１２"
+                        break
+                        case 12:
+                        html += "１３"
+                        break
+                        case 13:
+                        html += "１４"
+                        break
+                        case 14:
+                        html += "１５"
+                        break
+                        case 15:
+                        html += "１６"
+                        break
+                        case 16:
+                        html += "１７"
+                        break
+                        case 17:
+                        html += "１８"
+                        break
+                        case 18:
+                        html += "１９"
+                        break
+                    }
                     for(var j = 0; j < 19; j++){
                         html += '<span id="' + id + ' ' + id2 + '" style="line-height:10px">十</span>'
                         id += 1
@@ -221,7 +281,6 @@
                     html += '<br>'
                 }
                 document.getElementById('board').innerHTML = html
-                document.getElementById('error').innerHTML = ""
             }
 
             document.onkeydown = function(e) {
